@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter} from "react-router-dom";
 import {QueryClient, QueryClientProvider} from 'react-query';
+import {AppRouter} from "./Pages/AppRouter";
 
 const queryClient = new QueryClient()
 
@@ -8,8 +9,9 @@ const queryClient = new QueryClient()
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-        </BrowserRouter>
+            <BrowserRouter>
+                <AppRouter/>
+            </BrowserRouter>
         </QueryClientProvider>
     );
 }
