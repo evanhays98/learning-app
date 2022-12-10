@@ -21,11 +21,13 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "@api": ["./libs/api/src"],
+      "@api": [
+        "./libs/api/src"
+      ]
     }
   },
   "include": [
     "src",
-    "libs"
+    "src/libs"
   ]
 }

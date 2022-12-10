@@ -3,7 +3,7 @@ export const theme = {
         white: '#fff',
         black: "#131616",
         red: "#842020",
-        pink: "#b36cc2",
+        pink: "#7c5d84",
         pinkMuted: "#ddcae2",
         pinkAccessible: "#872a9e",
         lg: "linear-gradient(45deg,#b36cc2,#842020)",
