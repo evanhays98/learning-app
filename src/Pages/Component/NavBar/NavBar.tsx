@@ -17,7 +17,7 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
         ...theme.basicFlex,
         justifyContent: 'space-evenly',
         borderTop: '5px solid',
-        borderColor: theme.colors.red,
+        borderColor: theme.colors.pink,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20
     },
