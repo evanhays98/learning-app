@@ -1,0 +1,750 @@
+
+file path : ./Theme/Theme.ts
+export const theme = {
+    colors: {
+        white: '#fff',
+        black: "#131616",
+        red: "#842020",
+        pink: "#7c5d84",
+        pinkMuted: "#ddcae2",
+        pinkAccessible: "#872a9e",
+        lg: "linear-gradient(45deg,#b36cc2,#842020)",
+        rg: "radial-gradient(59.8% 50% at 50% 50%,#741d46 0,#ca538b 100%);"
+    },
+    marginBase: 8,
+    basicFlex: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    icon: {
+        large: 24,
+        normal: 24,
+    },
+    borderRadius: {
+        std: 8,
+    },
+    fonts: {
+        h1: {
+            fontFamily: 'Kodchasan, sans-serif',
+            color: '#fff',
+            fontWeight: 900,
+            fontSize: 44,
+            lineHeight: '125%',
+        },
+        h2: {
+            fontFamily: 'Kodchasan, sans-serif',
+            color: '#fff',
+            fontWeight: 900,
+            fontSize: 35,
+            lineHeight: '125%',
+        },
+        h3: {
+            fontFamily: 'Kodchasan, sans-serif',
+            color: '#fff',
+            fontWeight: 900,
+            fontSize: 28,
+            lineHeight: '125%',
+        },
+        h4: {
+            fontFamily: 'Kodchasan, sans-serif',
+            color: '#fff',
+            fontWeight: 700,
+            fontSize: 20,
+            lineHeight: '125%',
+        },
+        h5: {
+            fontFamily: 'Kodchasan, sans-serif',
+            color: '#fff',
+            fontWeight: 700,
+            fontSize: 16,
+            lineHeight: '125%',
+        },
+        body: {
+            fontFamily: 'Kodchasan, sans-serif',
+            color: '#fff',
+            fontWeight: 400,
+            fontSize: 16,
+            lineHeight: '175%',
+        },
+        caption: {
+            fontFamily: 'Kodchasan, sans-serif',
+            color: '#fff',
+            fontWeight: 400,
+            fontSize: 14,
+            lineHeight: '150%',
+        },
+        label: {
+            fontFamily: 'Muli, Helvetica, Arial, sans-serif',
+            color: '#fff',
+            fontWeight: 700,
+            fontSize: 14,
+            lineHeight: '150%',
+        },
+        calendarText: {
+            fontFamily: 'Muli, Helvetica, Arial, sans-serif',
+            color: '#fff',
+            fontWeight: 400,
+            fontSize: 12,
+            lineHeight: '150%',
+        },
+    },
+
+}
+
+export type Theme = typeof theme
+file path : ./index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './stylesConfig/index.scss';
+
+const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+);
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
+
+
+file path : ./Pages/Component/PageTitle.tsx
+import React from 'react';
+import {createUseStyles} from "react-jss";
+import {Theme, theme} from "../../Theme/Theme";
+
+const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
+    globalContainer: {
+        width: '100%',
+        padding: [theme.marginBase * 3, theme.marginBase * 2],
+    },
+    title: {
+        ...theme.fonts.h1,
+        color: theme.colors.pink
+    }
+}));
+
+interface Props {
+    text: string,
+}
+
+export const PageTitle = ({text}: Props) => {
+    const classes = useStyles({theme})
+    return (
+        <div className={classes.globalContainer}>
+            <h1 className={classes.title}>{text}</h1>
+        </div>
+    );
+}
+file path : ./Pages/Component/NavBar/NavBarLink.tsx
+import React from 'react';
+import {createUseStyles} from "react-jss";
+import {theme, Theme} from '../../../Theme/Theme'
+import {AiOutlineHome} from "react-icons/ai";
+import {MdWorkOutline} from "react-icons/md";
+import {RiUser3Line} from "react-icons/ri";
+import {NavLink} from "react-router-dom";
+import classnames from 'classnames'
+
+const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
+    container: {
+        ...theme.basicFlex,
+        padding: theme.marginBase / 2,
+        borderRadius: theme.borderRadius.std
+    },
+    active: {
+        background: theme.colors.red,
+    },
+    icon: {
+        fontSize: theme.icon.large,
+        color: theme.colors.white
+    }
+}));
+
+export enum Icon {
+    home,
+    work,
+    profile,
+}
+
+interface Props {
+    icon: Icon,
+    to: string,
+}
+
+
+export const NavBarLink = ({icon, to}: Props) => {
+    const classes = useStyles({theme})
+    return (
+        <NavLink to={to} className={({isActive}) => classnames(classes.container, {[classes.active]: isActive})}>
+            {icon === Icon.home && <AiOutlineHome className={classes.icon}/>}
+            {icon === Icon.work && <MdWorkOutline className={classes.icon}/>}
+            {icon === Icon.profile && <RiUser3Line className={classes.icon}/>}
+        </NavLink>
+    );
+}
+file path : ./Pages/Component/NavBar/NavBar.tsx
+import React from 'react';
+import {createUseStyles} from "react-jss";
+import {theme, Theme} from '../../../Theme/Theme'
+import {Icon, NavBarLink} from "./NavBarLink";
+
+const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
+    page: {
+        backgroundColor: theme.colors.black,
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column-reverse',
+        position: 'relative',
+    },
+    navBar: {
+        width: "100%",
+        padding: [theme.marginBase * 2, theme.marginBase * 3],
+        ...theme.basicFlex,
+        justifyContent: 'space-evenly',
+        borderTop: '5px solid',
+        borderColor: theme.colors.red,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
+    },
+    lineBar:{
+        width: "100%",
+        background: theme.colors.rg,
+        height: theme.marginBase / 2,
+    },
+    pageContainer: {
+      width: '100%',
+      height: '100%',
+      overflow: 'auto',
+    }
+}));
+
+interface Props {
+    children?: React.ReactNode
+}
+
+export const NavBar = ({children}: Props) => {
+    const classes = useStyles({theme})
+    return (
+        <div className={classes.page}>
+            <div className={classes.navBar}>
+                <NavBarLink icon={Icon.home} to="/home" />
+                <NavBarLink icon={Icon.work} to="/work" />
+                <NavBarLink icon={Icon.profile} to="/profile" />
+            </div>
+            <div className={classes.pageContainer}>
+                {children}
+            </div>
+        </div>
+    );
+}
+file path : ./Pages/Component/Button.tsx
+import React from 'react';
+import {createUseStyles} from "react-jss";
+import {Theme, theme} from "../../Theme/Theme";
+
+
+const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
+    globalContainer: {
+        backgroundColor: theme.colors.pinkMuted,
+        width: '100%',
+        padding: theme.marginBase * 2,
+        outline: 'none',
+        border: 'none',
+        borderRadius: theme.borderRadius.std
+    },
+    text: {
+        ...theme.fonts.h5,
+        color: theme.colors.pinkAccessible
+    }
+}));
+
+
+interface Props {
+    text: string,
+    type?: string
+}
+
+export const Button = ({text, type = undefined}: Props) => {
+    const classes = useStyles({theme})
+    return (
+        <button className={classes.globalContainer} type={undefined}>
+            <h1 className={classes.text}>{text}</h1>
+        </button>
+    );
+}
+file path : ./Pages/Component/Input/TextArea1/TextArea1.tsx
+import React, {useState} from "react";
+
+interface TextArea1Props {
+    title: string,
+    function: any,
+    name: string,
+    id: string,
+}
+
+const TextArea1 = (props : TextArea1Props) => {
+
+
+    const handleValue = (test: any) => {
+        if (test.value)
+            test.classList.add('has-value');
+        else
+            test.classList.remove('has-value');
+    }
+
+    return (
+        <div className="textarea1">
+            <textarea name={props.name} id={props.id} required onChange={(e) => {
+                props.function(e.target.value);
+                handleValue(e.target);
+            }}/>
+            <label>{props.title}</label>
+        </div>
+    );
+};
+
+export default TextArea1;
+file path : ./Pages/Component/Input/Input1/Input1.tsx
+import React, {useState} from "react";
+import {useFormikContext} from "formik";
+import {AiOutlineEye} from "react-icons/ai";
+import {createUseStyles} from "react-jss";
+import {theme, Theme} from "../../../../Theme/Theme";
+
+const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
+    eyeContainer: {
+        padding: theme.marginBase / 2,
+        position: "absolute",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        right: 0,
+        bottom: -2,
+        marginRight: 10,
+    },
+    eye: {
+        fontSize: theme.icon.normal,
+        color: theme.colors.white
+    }
+}));
+
+interface Input1Props {
+    title: string,
+    type?: string,
+    name: string,
+    value?: string
+    maxLength?: number
+    eye?: boolean
+}
+
+const Input1 = ({title, type = "text", name, value, maxLength = 20, eye}: Input1Props) => {
+
+    const [val, setVal] = useState(value || '')
+    const formik = useFormikContext<any>();
+    const classes = useStyles({theme})
+    const [_type, setType] = useState(type)
+
+    const handleValue = (e: any) => {
+        setVal(e.value);
+        formik.setFieldValue(
+            name,
+            e.value
+        );
+        if (e.value)
+            e.classList.add('has-value');
+        else
+            e.classList.remove('has-value');
+    }
+
+    return (
+        <div className={"input1"}>
+            <input className={val ? 'has-value' : ''} type={_type} name={name} maxLength={maxLength} value={val}
+                   onChange={(e) => {
+                       handleValue(e.target);
+                   }}/>
+            <label>{title}</label>
+            {eye &&
+            <div className={classes.eyeContainer} onClick={() => {
+                _type === 'password' ? setType('text') : setType('password')
+            }}>
+                <AiOutlineEye className={classes.eye}/>
+            </div>
+            }
+        </div>
+    );
+}
+;
+
+export default Input1;
+file path : ./Pages/Login/Register.tsx
+import React from 'react';
+import {createUseStyles} from "react-jss";
+import {theme, Theme} from "../../Theme/Theme";
+import {PageTitle} from "../Component/PageTitle";
+import Input1 from "../Component/Input/Input1/Input1";
+import {Form, Formik} from 'formik';
+import {Button} from "../Component/Button";
+import {useSignUp} from "../../libs/api/src";
+
+const useStyles = createUseStyles((theme: Theme) => ({
+    page: {
+        backgroundColor: theme.colors.black,
+        height: '100vh',
+    },
+    container: {
+        margin: theme.marginBase * 2,
+    }
+}));
+
+interface Values {
+    mail: string,
+    password: string,
+    confirmPassword: string,
+    pseudo: string,
+}
+
+const initialValues = {
+    mail: '',
+    password: '',
+    confirmPassword: '',
+    pseudo: ''
+}
+
+export const Register = () => {
+    const classes = useStyles({theme})
+    const {mutateAsync: signup} = useSignUp()
+
+    const submit = async (values: Values) => {
+        try {
+            const test = await signup({mail: values.mail, pseudo: values.pseudo, password: values.password})
+            console.log(test)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    return (
+        <div className={classes.page}>
+            <PageTitle text={"Sign up"}/>
+            <div className={classes.container}>
+                <Formik initialValues={initialValues} onSubmit={submit}>
+                    <Form>
+                        <Input1 title="Email" name='mail'/>
+                        <Input1 title="Pseudo" name='pseudo'/>
+                        <Input1 title="Password" name='password' type='password' eye/>
+                        <Input1 title="Confirm Password" name='confirmPassword' type='password' eye/>
+                        <Button text="Join" type='submit'/>
+                    </Form>
+                </Formik>
+            </div>
+        </div>
+    );
+}
+file path : ./Pages/Login/Login.tsx
+import React from 'react';
+import {createUseStyles} from "react-jss";
+import {theme, Theme} from "../../Theme/Theme";
+import {PageTitle} from "../Component/PageTitle";
+import Input1 from "../Component/Input/Input1/Input1";
+import {Form, Formik} from 'formik';
+import {Button} from "../Component/Button";
+import {LoginUserDto, useLogin} from "../../libs/api/src";
+
+
+const useStyles = createUseStyles((theme: Theme) => ({
+    page: {
+        height: '100vh',
+        maxWidth: theme.marginBase * 80,
+        margin: '0 auto'
+    },
+    container: {
+        margin: theme.marginBase * 2,
+    },
+    wrapper: {}
+}));
+
+export const Login = () => {
+    const classes = useStyles({theme})
+    const {mutateAsync: login} = useLogin()
+
+
+    const submit = async (values: LoginUserDto) => {
+        try {
+            await login(values)
+        } catch (e) {
+            throw e
+        }
+    }
+
+    return (
+        <div className={classes.page}>
+            <PageTitle text={"Sign in"}/>
+            <div className={classes.container}>
+                <div className={classes.wrapper}>
+                    <Formik initialValues={{mail: '', password: ''}} onSubmit={submit}>
+                        <Form>
+                            <Input1 title="Email" name='mail'/>
+                            <Input1 title="Password" name='password' type='password' eye/>
+                            <Button text="Connect" type='submit'/>
+                        </Form>
+                    </Formik>
+                </div>
+            </div>
+        </div>
+    );
+}
+file path : ./Pages/Home/Home.tsx
+import React from 'react';
+import {createUseStyles} from "react-jss";
+import {NavBar} from "../Component/NavBar/NavBar";
+import {Theme, theme} from "../../Theme/Theme";
+import {PageTitle} from "../Component/PageTitle";
+import {useMe} from "../../libs/api/src";
+
+const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
+    globalContainer: {},
+}));
+
+export const Home = () => {
+    const classes = useStyles({theme})
+    const me = useMe()
+    console.log(me)
+    return (
+        <NavBar>
+            <div className={classes.globalContainer}>
+                <PageTitle text={"Home"}/>
+            </div>
+        </NavBar>
+    );
+}
+
+file path : ./Pages/AppRouter.tsx
+import {Route, Routes} from "react-router-dom";
+import {Login} from "./Login/Login";
+import {Home} from "./Home/Home";
+import {Register} from "./Login/Register";
+
+export const AppRouter = () => {
+    return (
+        <Routes>
+            <Route path='/*' element={<Login/>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/register' element={<Register/>}/>
+            <Route path='/home' element={<Home/>}/>
+        </Routes>
+    )
+}
+file path : ./App.tsx
+import React from 'react';
+import {BrowserRouter} from "react-router-dom";
+import {QueryClient, QueryClientProvider} from 'react-query';
+import {AppRouter} from "./Pages/AppRouter";
+
+const queryClient = new QueryClient()
+
+
+function App() {
+    return (
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <AppRouter/>
+            </BrowserRouter>
+        </QueryClientProvider>
+    );
+}
+
+export default App;
+
+file path : ./libs/api/src/auth.ts
+import {useMutation, useQuery, useQueryClient} from "react-query";
+import {queryCreate, queryGet} from "./fetch";
+import {useCallback} from "react";
+import {AxiosError} from "axios";
+
+interface UserLogin {
+    access_token: string,
+    userInfo: User
+}
+
+export interface User {
+    id: number,
+    mail: string,
+    password: string,
+    pseudo: string;
+    isActive: boolean,
+}
+
+export interface CreateUserDto {
+    mail: string,
+    password: string,
+    pseudo: string;
+}
+
+export interface LoginUserDto {
+    mail: string,
+    password: string,
+}
+
+export const useLogout = () => {
+    const queryClient = useQueryClient();
+
+    const onLogout = useCallback(async () => {
+        await queryClient.invalidateQueries();
+        queryClient.removeQueries();
+        window.location.replace('/');
+    }, [queryClient]);
+
+    return useMutation<void, AxiosError, void>(queryCreate(`/v2/auth/logout`), {
+        onSuccess: onLogout,
+        onError: onLogout,
+    });
+};
+
+export const useMe = () => {
+    const queryClient = useQueryClient();
+    const {mutate: logout} = useLogout();
+
+    return useQuery<User, AxiosError>(
+        ['auth', 'me'],
+        queryGet('/auth/me'),
+        {
+            staleTime: 1000 * 60, // 1 min
+            onSuccess: (data) => {
+                queryClient.setQueryData(['account', data.id], data);
+            },
+            retry: (count, error) => {
+                if (error.response && error.response.status === 401) {
+                    logout()
+                }
+                return count < 2;
+            },
+        },
+    );
+};
+
+export const useLogin = () => {
+    const queryClient = useQueryClient();
+    return useMutation<UserLogin, undefined, LoginUserDto>(
+        queryCreate(`/auth/signin`),
+        {
+            onSuccess: (data) => {
+                queryClient.setQueryData(['account', data.userInfo.id], data.userInfo);
+                queryClient.setQueryData(['auth', 'me'], data.userInfo);
+            },
+        },
+    );
+};
+
+export const useSignUp = () => {
+    const queryClient = useQueryClient();
+    return useMutation<UserLogin, undefined, CreateUserDto>(
+        queryCreate(`/auth/signup`),
+        {
+            onSuccess: (data) => {
+                queryClient.setQueryData(['account', data.userInfo.id], data.userInfo);
+                queryClient.setQueryData(['auth', 'me'], data.userInfo);
+            },
+        },
+    );
+};
+file path : ./libs/api/src/index.ts
+export * from './auth'
+file path : ./libs/api/src/fetch.ts
+import Axios, {AxiosRequestConfig} from 'axios';
+
+export const API_URL = 'http://localhost:3003';
+
+export const fetchWithAuth = async <T = any>(
+    options: AxiosRequestConfig,
+): Promise<T> => {
+    try {
+        const accessToken = localStorage.getItem('accessToken');
+        const result = await Axios({
+            ...options,
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        });
+        const newAccessToken = result.data.access_token;
+        if (newAccessToken) {
+            localStorage.setItem('accessToken', newAccessToken);
+        }
+        return result.data;
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const queryFetch = <T = any>(
+    options: AxiosRequestConfig,
+): Promise<T> => {
+
+    return fetchWithAuth({
+        ...options,
+    });
+};
+
+export const queryGet = (path: string, params?: Object) => () => {
+    return queryFetch({
+        url: `${API_URL}${path}`,
+        params: params,
+        method: 'GET',
+    });
+};
+
+export interface QueryUpdateOptions {
+    params?: Object;
+}
+
+export const queryUpdate =
+    (path: string | ((data: any) => string), options?: QueryUpdateOptions) =>
+        (data: any) => {
+            const finalPath = typeof path === 'string' ? path : path(data);
+
+            return queryFetch({
+                url: `${API_URL}${finalPath}`,
+                params: options && options.params,
+                method: 'PATCH',
+                data,
+            });
+        };
+
+export const queryReplace =
+    (path: string | ((data: any) => string), options?: QueryUpdateOptions) =>
+        (data: any) => {
+            const finalPath = typeof path === 'string' ? path : path(data);
+
+            return queryFetch({
+                url: `${API_URL}${finalPath}`,
+                params: options && options.params,
+                method: 'PUT',
+                data,
+            });
+        };
+
+export interface QueryCreateOptions extends QueryUpdateOptions {
+}
+
+export const queryCreate =
+    (path: string, options?: QueryCreateOptions) => (data?: any) =>
+        queryFetch({
+            url: `${API_URL}${path}`,
+            params: options && options.params,
+            method: 'POST',
+            data,
+        });
+
+export const queryDelete =
+    (path: string | ((data: any) => string), options?: QueryUpdateOptions) =>
+        (data: any) => {
+            const finalPath = typeof path === 'string' ? path : path(data);
+
+            return queryFetch({
+                url: `${API_URL}${finalPath}`,
+                params: options && options.params,
+                method: 'DELETE',
+                data,
+            });
+        };

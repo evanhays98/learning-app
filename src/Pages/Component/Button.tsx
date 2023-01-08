@@ -5,7 +5,7 @@ import {Theme, theme} from "../../Theme/Theme";
 
 const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     globalContainer: {
-        backgroundColor: theme.colors.pinkMuted,
+        backgroundColor: theme.colors.darkSlateGray,
         width: '100%',
         padding: theme.marginBase * 2,
         outline: 'none',
@@ -14,7 +14,7 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     },
     text: {
         ...theme.fonts.h5,
-        color: theme.colors.pinkAccessible
+        color: theme.colors.goldRush
     }
 }));
 

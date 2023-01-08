@@ -5,7 +5,7 @@ import {PageTitle} from "../Component/PageTitle";
 import Input1 from "../Component/Input/Input1/Input1";
 import {Form, Formik} from 'formik';
 import {Button} from "../Component/Button";
-import {useLogin} from "../../libs/api/src";
+import {LoginUserDto, useLogin} from "../../libs/api/src";
 
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -20,23 +20,15 @@ const useStyles = createUseStyles((theme: Theme) => ({
     wrapper: {}
 }));
 
-interface Values {
-    email: string,
-    password: string,
-}
-
 export const Login = () => {
     const classes = useStyles({theme})
     const {mutateAsync: login} = useLogin()
 
 
-    const submit = (values: Values) => {
-        console.log("OK")
-        console.log(values)
+    const submit = async (values: LoginUserDto) => {
         try {
-            login(values)
+            await login(values)
         } catch (e) {
-            console.log(e)
             throw e
         }
     }
@@ -46,9 +38,9 @@ export const Login = () => {
             <PageTitle text={"Sign in"}/>
             <div className={classes.container}>
                 <div className={classes.wrapper}>
-                    <Formik initialValues={{email: '', password: ''}} onSubmit={submit}>
+                    <Formik initialValues={{mail: '', password: ''}} onSubmit={submit}>
                         <Form>
-                            <Input1 title="Email" name='email'/>
+                            <Input1 title="Email" name='mail'/>
                             <Input1 title="Password" name='password' type='password' eye/>
                             <Button text="Connect" type='submit'/>
                         </Form>

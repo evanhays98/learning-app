@@ -1,3 +1,53 @@
+export const useMe = () => {
+    const queryClient = useQueryClient();
+    const {mutate: logout} = useLogout();
+
+    return useQuery<User, AxiosError>(
+        ['auth', 'me'],
+        queryGet('/auth/me'),
+        {
+            staleTime: 1000 * 60, // 1 min
+            onSuccess: (data) => {
+                queryClient.setQueryData(['account', data.id], data);
+            },
+            retry: (count, error) => {
+                if (error.response && error.response.status === 401) {
+                    logout()
+                }
+                return count < 2;
+            },
+        },
+    );
+};
+
+export const useLogin = () => {
+    const queryClient = useQueryClient();
+    return useMutation<UserLogin, undefined, LoginUserDto>(
+        queryCreate(`/auth/signin`),
+        {
+            onSuccess: (data) => {
+                queryClient.setQueryData(['account', data.userInfo.id], data.userInfo);
+                queryClient.setQueryData(['auth', 'me'], data.userInfo);
+            },
+        },
+    );
+};
+
+export const useSignUp = () => {
+    const queryClient = useQueryClient();
+    return useMutation<UserLogin, undefined, CreateUserDto>(
+        queryCreate(`/auth/signup`),
+        {
+            onSuccess: (data) => {
+                queryClient.setQueryData(['account', data.userInfo.id], data.userInfo);
+                queryClient.setQueryData(['auth', 'me'], data.userInfo);
+            },
+        },
+    );
+};
+file path : ./libs/api/src/index.ts
+export * from './auth'
+file path : ./libs/api/src/fetch.ts
 import Axios, {AxiosRequestConfig} from 'axios';
 
 export const API_URL = 'http://localhost:3003';

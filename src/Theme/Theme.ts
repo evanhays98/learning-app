@@ -1,11 +1,15 @@
 export const theme = {
     colors: {
-        white: '#fff',
-        black: "#131616",
-        red: "#842020",
-        pink: "#7c5d84",
-        pinkMuted: "#ddcae2",
-        pinkAccessible: "#872a9e",
+        brightYellow: '#FFFF00',
+        deepBrown: 'linear-gradient(180deg, #2c2a1f, #0e100d, #000706);',
+        darkCharcoal: '#2D2D22',
+        darkOliveGreen: '#48480F',
+        darkSlateGray: '#2F4F4F',
+        darkOrange: '#FF8C00',
+        goldRush: '#FFD700',
+        mustardYellow: '#E1E15E',
+        orangePeel: '#FFA500',
+        silverLining: '#E2E2D5',
         lg: "linear-gradient(45deg,#b36cc2,#842020)",
         rg: "radial-gradient(59.8% 50% at 50% 50%,#741d46 0,#ca538b 100%);"
     },
@@ -27,14 +31,14 @@ export const theme = {
             fontFamily: 'Kodchasan, sans-serif',
             color: '#fff',
             fontWeight: 900,
-            fontSize: 44,
+            fontSize: 36,
             lineHeight: '125%',
         },
         h2: {
             fontFamily: 'Kodchasan, sans-serif',
             color: '#fff',
             fontWeight: 900,
-            fontSize: 35,
+            fontSize: 32,
             lineHeight: '125%',
         },
         h3: {
@@ -62,7 +66,7 @@ export const theme = {
             fontFamily: 'Kodchasan, sans-serif',
             color: '#fff',
             fontWeight: 400,
-            fontSize: 16,
+            fontSize: 14,
             lineHeight: '175%',
         },
         caption: {
@@ -73,7 +77,7 @@ export const theme = {
             lineHeight: '150%',
         },
         label: {
-            fontFamily: 'Muli, Helvetica, Arial, sans-serif',
+            fontFamily: 'Kodchasan, sans-serif',
             color: '#fff',
             fontWeight: 700,
             fontSize: 14,

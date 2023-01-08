@@ -3,20 +3,37 @@ import {queryCreate, queryGet} from "./fetch";
 import {useCallback} from "react";
 import {AxiosError} from "axios";
 
+interface UserLogin {
+    access_token: string,
+    userInfo: User
+}
+
 export interface User {
     id: number,
     mail: string,
     password: string,
+    pseudo: string;
     isActive: boolean,
+}
+
+export interface CreateUserDto {
+    mail: string,
+    password: string,
+    pseudo: string;
+}
+
+export interface LoginUserDto {
+    mail: string,
+    password: string,
 }
 
 export const useLogout = () => {
     const queryClient = useQueryClient();
 
-    const onLogout = useCallback(() => {
-        queryClient.invalidateQueries();
+    const onLogout = useCallback(async () => {
+        await queryClient.invalidateQueries();
         queryClient.removeQueries();
-        window.location.replace('/login');
+        window.location.replace('/');
     }, [queryClient]);
 
     return useMutation<void, AxiosError, void>(queryCreate(`/v2/auth/logout`), {
@@ -25,13 +42,13 @@ export const useLogout = () => {
     });
 };
 
-export const useMe = (allowAnonymous?: boolean) => {
+export const useMe = () => {
     const queryClient = useQueryClient();
-    const { mutate: logout } = useLogout();
+    const {mutate: logout} = useLogout();
 
     return useQuery<User, AxiosError>(
         ['auth', 'me'],
-        queryGet('auth/profile'),
+        queryGet('/auth/me'),
         {
             staleTime: 1000 * 60, // 1 min
             onSuccess: (data) => {
@@ -39,14 +56,9 @@ export const useMe = (allowAnonymous?: boolean) => {
             },
             retry: (count, error) => {
                 if (error.response && error.response.status === 401) {
-                    return false;
+                    logout()
                 }
                 return count < 2;
-            },
-            onError: () => {
-                if (!allowAnonymous) {
-                    logout();
-                }
             },
         },
     );
@@ -54,12 +66,25 @@ export const useMe = (allowAnonymous?: boolean) => {
 
 export const useLogin = () => {
     const queryClient = useQueryClient();
-    return useMutation<User, undefined, { email: string; password: string }>(
+    return useMutation<UserLogin, undefined, LoginUserDto>(
         queryCreate(`/auth/signin`),
         {
             onSuccess: (data) => {
-                queryClient.setQueryData(['account', data.id], data);
-                queryClient.setQueryData(['auth', 'me'], data);
+                queryClient.setQueryData(['account', data.userInfo.id], data.userInfo);
+                queryClient.setQueryData(['auth', 'me'], data.userInfo);
+            },
+        },
+    );
+};
+
+export const useSignUp = () => {
+    const queryClient = useQueryClient();
+    return useMutation<UserLogin, undefined, CreateUserDto>(
+        queryCreate(`/auth/signup`),
+        {
+            onSuccess: (data) => {
+                queryClient.setQueryData(['account', data.userInfo.id], data.userInfo);
+                queryClient.setQueryData(['auth', 'me'], data.userInfo);
             },
         },
     );
