@@ -4,11 +4,11 @@ import {theme, Theme} from "../../Theme/Theme";
 import {PageTitle} from "../Component/PageTitle";
 import Input1 from "../Component/Input/Input1/Input1";
 import {Form, Formik} from 'formik';
-import {Button} from "../Component/Button";
+import {Button} from "../Component/Buttons/Button";
 
 const useStyles = createUseStyles((theme: Theme) => ({
     page: {
-        backgroundColor: theme.colors.black,
+        backgroundColor: theme.colors.darkGray,
         height: '100vh',
     },
     container: {

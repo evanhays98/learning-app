@@ -1,11 +1,9 @@
 import React from 'react';
 import {createUseStyles} from "react-jss";
 import {theme, Theme} from '../../../Theme/Theme'
-import {AiOutlineHome} from "react-icons/ai";
-import {MdWorkOutline} from "react-icons/md";
-import {RiUser3Line} from "react-icons/ri";
 import {NavLink} from "react-router-dom";
 import classnames from 'classnames'
+import {Icon, Icons} from "../Icons";
 
 const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     container: {
@@ -14,19 +12,14 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
         borderRadius: theme.borderRadius.std
     },
     active: {
-        background: theme.colors.red,
+        background: theme.colors.darkOrange,
     },
     icon: {
         fontSize: theme.icon.large,
-        color: theme.colors.white
+        color: theme.colors.lightGray
     }
 }));
 
-export enum Icon {
-    home,
-    work,
-    profile,
-}
 
 interface Props {
     icon: Icon,
@@ -37,10 +30,10 @@ interface Props {
 export const NavBarLink = ({icon, to}: Props) => {
     const classes = useStyles({theme})
     return (
-        <NavLink to={to} className={({isActive}) => classnames(classes.container, {[classes.active]: isActive})}>
-            {icon === Icon.home && <AiOutlineHome className={classes.icon}/>}
-            {icon === Icon.work && <MdWorkOutline className={classes.icon}/>}
-            {icon === Icon.profile && <RiUser3Line className={classes.icon}/>}
+        <NavLink to={to} className={({isActive}: any) => classnames(classes.container, {[classes.active]: isActive})}>
+            {icon === Icon.home && <Icons icon={Icon.home}/>}
+            {icon === Icon.work && <Icons icon={Icon.work}/>}
+            {icon === Icon.profile && <Icons icon={Icon.profile}/>}
         </NavLink>
     );
 }

@@ -1,23 +1,39 @@
+const basicColors = {
+    yellowGradient: 'linear-gradient(180deg, #D39C39 0%, #CB9F5F 100%)',
+    darkGradient: 'linear-gradient(200deg, rgba(50, 50, 38, 100) 0%, rgba(26, 26, 18, 100) 40%, rgba(0, 7, 6, 100) 100%)',
+    lightGray: '#E2E2D5',
+    darkGray: '#1E1E1E',
+    transparentDarkGray: 'rgba(45, 45, 34, 0.33)',
+    lightBeige: '#C9B27A',
+    transparentYellow: 'rgba(255, 215, 0, 0.08)',
+    orange: '#A77928',
+    darkOrange: '#C49734',
+    lightOrange: '#D5AC53',
+    gold: '#d2a046',
+    transparentDarkGray2: 'rgba(45, 45, 34, 0.33)',
+    brown: '#784D0C',
+    transparent: '#FFFFFF00',
+    black: '#000000',
+};
+export type Colors = keyof typeof basicColors;
+export type ColorsTest = typeof basicColors;
+
 export const theme = {
-    colors: {
-        white: '#fff',
-        black: "#131616",
-        red: "#842020",
-        pink: "#7c5d84",
-        pinkMuted: "#ddcae2",
-        pinkAccessible: "#872a9e",
-        lg: "linear-gradient(45deg,#b36cc2,#842020)",
-        rg: "radial-gradient(59.8% 50% at 50% 50%,#741d46 0,#ca538b 100%);"
-    },
+    colors: basicColors,
     marginBase: 8,
     basicFlex: {
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        flexWrap: 'wrap',
+        gap: 8
+    },
+    boxShadow: {
+        std: `0px 0px 30px 8px ${basicColors.lightBeige}20`,
     },
     icon: {
         large: 24,
-        normal: 24,
+        normal: 16,
     },
     borderRadius: {
         std: 8,
@@ -25,66 +41,57 @@ export const theme = {
     fonts: {
         h1: {
             fontFamily: 'Kodchasan, sans-serif',
-            color: '#fff',
+            color: basicColors.lightGray,
             fontWeight: 900,
             fontSize: 44,
-            lineHeight: '125%',
         },
         h2: {
             fontFamily: 'Kodchasan, sans-serif',
-            color: '#fff',
+            color: basicColors.lightGray,
             fontWeight: 900,
             fontSize: 35,
-            lineHeight: '125%',
         },
         h3: {
             fontFamily: 'Kodchasan, sans-serif',
-            color: '#fff',
+            color: basicColors.lightGray,
             fontWeight: 900,
             fontSize: 28,
-            lineHeight: '125%',
         },
         h4: {
             fontFamily: 'Kodchasan, sans-serif',
-            color: '#fff',
+            color: basicColors.lightGray,
             fontWeight: 700,
             fontSize: 20,
-            lineHeight: '125%',
         },
         h5: {
             fontFamily: 'Kodchasan, sans-serif',
-            color: '#fff',
+            color: basicColors.lightGray,
             fontWeight: 700,
             fontSize: 16,
-            lineHeight: '125%',
         },
         body: {
             fontFamily: 'Kodchasan, sans-serif',
-            color: '#fff',
+            color: basicColors.lightGray,
             fontWeight: 400,
             fontSize: 16,
-            lineHeight: '175%',
         },
         caption: {
             fontFamily: 'Kodchasan, sans-serif',
-            color: '#fff',
+            color: basicColors.lightGray,
             fontWeight: 400,
             fontSize: 14,
-            lineHeight: '150%',
         },
         label: {
-            fontFamily: 'Muli, Helvetica, Arial, sans-serif',
-            color: '#fff',
+            fontFamily: 'Kodchasan, sans-serif',
+            color: basicColors.lightGray,
             fontWeight: 700,
             fontSize: 14,
-            lineHeight: '150%',
         },
         calendarText: {
-            fontFamily: 'Muli, Helvetica, Arial, sans-serif',
-            color: '#fff',
+            fontFamily: 'Kodchasan, sans-serif',
+            color: basicColors.lightGray,
             fontWeight: 400,
             fontSize: 12,
-            lineHeight: '150%',
         },
     },
 

@@ -9,7 +9,7 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     },
     title: {
         ...theme.fonts.h1,
-        color: theme.colors.pink
+        color: theme.colors.lightOrange
     }
 }));
 
