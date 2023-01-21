@@ -49,6 +49,14 @@
       "react-app/jest"
     ]
   },
+  "paths": {
+    "*.ts": [
+      "*"
+    ],
+    "test": [
+      "src/Theme"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",

@@ -1,23 +1,27 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 import { Theme, theme } from '../theme/Theme';
-import { CircularProgress } from '@mui/material';
 
 const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
   globalContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     width: '100%',
-    height: '100%',
+    padding: [theme.marginBase * 3, theme.marginBase * 2],
+  },
+  title: {
+    ...theme.fonts.h1,
+    color: theme.colors.lightOrange,
   },
 }));
 
-export const CenteredLoader = () => {
+interface Props {
+  text: string,
+}
+
+export const PageTitle = ({ text }: Props) => {
   const classes = useStyles({ theme });
   return (
     <div className={classes.globalContainer}>
-      <CircularProgress />
+      <h1 className={classes.title}>{text}</h1>
     </div>
   );
 };
