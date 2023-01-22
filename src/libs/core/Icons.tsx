@@ -14,7 +14,7 @@ const useStyles = createUseStyles<string, { size: number, color: Colors }, any>(
     borderRadius: theme.borderRadius.std,
   },
   active: {
-    background: theme.colors.darkOrange,
+    background: theme.colors.orange,
   },
   icon: props => ({
     fontSize: props.size,

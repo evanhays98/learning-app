@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useFormikContext } from 'formik';
 import { createUseStyles } from 'react-jss';
 import { theme, Theme } from 'src/libs/theme';
-import classnames from 'classnames';
 
 const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
   inputContainer: {
@@ -11,13 +10,6 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     marginTop: theme.marginBase * 2,
     ...theme.basicFlex,
     transition: 'all ease-in-out 0.3s',
-    borderLeft: ` solid 2px ${theme.colors.transparentDarkGray}`,
-    borderRight: ` solid 2px ${theme.colors.transparentDarkGray}`,
-    borderRadius: theme.borderRadius.std,
-    borderBottom: `2px solid ${theme.colors.lightGray}50`,
-    '&:focus-within': {
-      borderBottom: `2px solid ${theme.colors.lightGray}`,
-    },
   },
   eyeContainer: {
     padding: theme.marginBase / 2,
@@ -80,14 +72,14 @@ interface Props {
   maxLength?: number
 }
 
-export const TextArea = ({ title, name, value, maxLength = 200 }: Props) => {
+export const CheckBox = ({ title, name, value, maxLength = 200 }: Props) => {
 
     const [val, setVal] = useState(value || '');
     const formik = useFormikContext<any>();
     const classes = useStyles({ theme });
 
     const handleValue = (e: any) => {
-      setVal(e.value);
+      setVal(e.checked);
       formik.setFieldValue(
         name,
         e.value,
@@ -96,14 +88,12 @@ export const TextArea = ({ title, name, value, maxLength = 200 }: Props) => {
 
     return (
       <div className={classes.inputContainer}>
-        <textarea rows={3} className={classnames(classes.input)} name={name} maxLength={maxLength}
-                  value={val}
-                  onChange={(e) => {
-                    handleValue(e.target);
-                  }} />
-        <label className={classnames(classes.label, {
-          [classes.hasValue]: val,
-        })}>{title}</label>
+        <input type='checkbox' name={name} maxLength={maxLength}
+               value={val}
+               onChange={(e) => {
+                 handleValue(e.target);
+               }} />
+        {title}
       </div>
     );
   }

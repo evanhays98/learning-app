@@ -13,7 +13,7 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     alignItems: 'flex-start',
     gap: theme.marginBase * 3,
     borderRadius: theme.borderRadius.std,
-    backgroundColor: theme.colors.transparentDarkGray2,
+    backgroundColor: theme.colors.transparentDarkGray,
     padding: theme.marginBase * 2,
   },
   header: {

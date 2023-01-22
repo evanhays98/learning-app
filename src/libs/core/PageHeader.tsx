@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import { theme, Theme } from '../theme/Theme';
+import { ColorsTest, theme, Theme } from '../theme/Theme';
 import React from 'react';
 import { Button } from './Buttons/Button';
 import { Icon } from './Icons';
@@ -36,7 +36,7 @@ export const PageHeader = ({ title }: Props) => {
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>{title && title}</h1>
-      <Button bgColor='lightOrange' color='darkGray' square icon={Icon.close}
+      <Button color={ColorsTest.lightGray} square icon={Icon.close}
               sizeIcon={theme.marginBase * 5} />
     </div>);
 };

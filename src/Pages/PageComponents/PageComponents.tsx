@@ -1,9 +1,10 @@
 import classnames from 'classnames';
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { Colors, theme, Theme } from '../../libs/theme';
-import { Button, Icon, Input, PageHeader, PageTitle, QuestionTranslationCard } from 'src/libs/core';
+import { Colors, ColorsTest, theme, Theme } from '../../libs/theme';
+import { Button, Icon, Input, PageHeader, PageTitle, QuestionTranslationCard, TextArea } from 'src/libs/core';
 import mapValues from 'lodash/mapValues';
+import { CheckBox } from 'src/libs/core/Input/CheckBox';
 
 const useStyles = createUseStyles((theme: Theme) => ({
   page: {
@@ -50,6 +51,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     width: '100%',
     borderRadius: theme.borderRadius.std,
     padding: theme.marginBase * 2,
+    gap: theme.marginBase * 3,
   },
 }));
 
@@ -101,12 +103,14 @@ export const PageComponents = () => {
           <Button>hello</Button>
           <Button icon={Icon.profile}>hello</Button>
           <Button full>hello</Button>
-          <Button full line bgColor='transparent' color='lightBeige'>Send again</Button>
+          <Button full line bgColor='transparent' color={ColorsTest.orange}>Send again</Button>
         </div>
         <div className={classes.blockColorContainer}>
           <div className={classes.boxContainer}>
             <h1 className={classes.h3}>INPUT</h1>
             <Input title={'Email'} name='email' />
+            <TextArea title={'Description'} name='description' />
+            <CheckBox title='test' name='test' />
           </div>
         </div>
         <div className={classes.blockColorContainer}>

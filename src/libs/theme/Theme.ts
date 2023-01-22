@@ -16,10 +16,11 @@
   transparent: '#FFFFFF00',
   black: '#000000',
 };*/
+/*
 const basicColors = {
   yellowGradient: 'linear-gradient(180deg, #8B5FB5 0%, #D0A9F5 100%)',
-  darkGradient: 'linear-gradient(200deg, rgba(50, 50, 38, 0.5) 0%, rgba(26, 26, 18, 100) 40%, rgba(0, 7, 6, 100) 100%)',
-  lightGray: '#C3A5E6',
+  darkGradient: 'linear-gradient(200deg, #292038 0%, #1E1E1E 40%, #000000 100%)',
+  lightGray: '#dad5e2',
   darkGray: '#3B2D4F',
   transparentDarkGray: 'rgba(45, 45, 34, 0.33)',
   lightBeige: '#D0A9F5',
@@ -34,7 +35,20 @@ const basicColors = {
   transparent: '#FFFFFF00',
   black: '#000000',
 };
-
+*/
+const basicColors = {
+  yellowGradient: `linear-gradient(180deg, ${'#61c0e7'} 0%, ${'#00BFFF'} 100%)`,
+  darkGradient: `linear-gradient(200deg, ${'#203238'} 0%, ${'#141515'} 40%, ${'#000000'} 100%)`,
+  lightGray: '#e4ecec',
+  darkGray: '#111111',
+  lightBeige: '#87CEEB',
+  transparentYellow: '#87CEEB20',
+  orange: '#0077be',
+  transparentDarkGray: 'rgba(34,40,45,0.33)',
+  brownGradiant: `linear-gradient(180deg, ${'#017fcb'} 0%, ${'#00598d'} 100%)`,
+  transparent: '#FFFFFF00',
+  black: '#000000',
+};
 
 export type Colors = keyof typeof basicColors;
 export const ColorsTest = {
@@ -46,11 +60,6 @@ export const ColorsTest = {
   lightBeige: 'lightBeige' as Colors,
   transparentYellow: 'transparentYellow' as Colors,
   orange: 'orange' as Colors,
-  darkOrange: 'darkOrange' as Colors,
-  lightOrange: 'lightOrange' as Colors,
-  gold: 'gold' as Colors,
-  transparentDarkGray2: 'transparentDarkGray2' as Colors,
-  brown: 'brown' as Colors,
   brownGradiant: 'brownGradiant' as Colors,
   transparent: 'transparent' as Colors,
   black: 'black' as Colors,

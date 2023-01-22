@@ -10,15 +10,15 @@ const useStyles = createUseStyles((theme: Theme) => ({
   emptyPoint: {
     width: theme.marginBase + 2,
     height: theme.marginBase + 2,
-    border: '1px solid ' + theme.colors.brown,
+    border: '1px solid ' + theme.colors.orange,
     borderRadius: '50%',
   },
   filledPoint: {
     width: theme.marginBase + 2,
     height: theme.marginBase + 2,
-    border: '1px solid ' + theme.colors.brown,
+    border: '1px solid ' + theme.colors.orange,
     borderRadius: '50%',
-    backgroundColor: theme.colors.brown,
+    backgroundColor: theme.colors.orange,
   },
 }));
 

@@ -12,6 +12,9 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     marginTop: theme.marginBase * 2,
     ...theme.basicFlex,
     transition: 'all ease-in-out 0.3s',
+    borderLeft: ` solid 2px ${theme.colors.transparentDarkGray}`,
+    borderRight: ` solid 2px ${theme.colors.transparentDarkGray}`,
+    borderRadius: theme.borderRadius.std,
     borderBottom: `2px solid ${theme.colors.lightGray}50`,
     '&:focus-within': {
       borderBottom: `2px solid ${theme.colors.lightGray}`,
@@ -31,6 +34,7 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     color: theme.colors.lightGray,
   },
   input: {
+    resize: 'none',
     outline: 'none',
     borderRadius: [theme.borderRadius.std, theme.borderRadius.std, 0, 0],
     backgroundColor: 'transparent',
@@ -40,7 +44,7 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     padding: theme.marginBase,
     border: 'none',
     '&:focus + label': {
-      top: -theme.marginBase * 2,
+      top: -theme.marginBase * 3,
       left: 0,
       fontWeight: 700,
       color: theme.colors.orange,
@@ -62,7 +66,7 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
   hasValue: {
     fontWeight: 700,
     color: theme.colors.orange,
-    top: -theme.marginBase * 2,
+    top: -theme.marginBase * 3,
     left: 0,
     transition: 'all ease-in-out 0.2s',
     paddingLeft: '1%',

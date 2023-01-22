@@ -51,7 +51,7 @@ interface Values {
 export const Button = ({
                          className,
                          square,
-                         bgColor = 'brown',
+                         bgColor = 'brownGradiant',
                          color = 'lightGray',
                          children,
                          text,
