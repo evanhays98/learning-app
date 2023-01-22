@@ -8,7 +8,7 @@ import { Button } from '../../libs/core/Buttons/Button';
 
 const useStyles = createUseStyles((theme: Theme) => ({
   page: {
-    backgroundColor: theme.colors.darkGray,
+    backgroundColor: theme.colors.black,
     height: '100vh',
   },
   container: {

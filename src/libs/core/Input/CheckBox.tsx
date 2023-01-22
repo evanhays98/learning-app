@@ -2,65 +2,34 @@ import React, { useState } from 'react';
 import { useFormikContext } from 'formik';
 import { createUseStyles } from 'react-jss';
 import { theme, Theme } from 'src/libs/theme';
+import classnames from 'classnames';
 
 const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
   inputContainer: {
     width: '100%',
     position: 'relative',
-    marginTop: theme.marginBase * 2,
     ...theme.basicFlex,
-    transition: 'all ease-in-out 0.3s',
   },
-  eyeContainer: {
-    padding: theme.marginBase / 2,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 0,
-    bottom: 6,
-    marginRight: 10,
-  },
-  eye: {
-    fontSize: theme.icon.normal,
-    color: theme.colors.lightGray,
-  },
-  input: {
-    resize: 'none',
-    outline: 'none',
-    borderRadius: [theme.borderRadius.std, theme.borderRadius.std, 0, 0],
-    backgroundColor: 'transparent',
-    flex: 1,
-    margin: 'auto',
+  text: {
     ...theme.fonts.label,
-    padding: theme.marginBase,
-    border: 'none',
-    '&:focus + label': {
-      top: -theme.marginBase * 3,
-      left: 0,
-      fontWeight: 700,
-      color: theme.colors.orange,
-      transition: 'all ease-in-out 0.2s',
-      paddingLeft: '1%',
-    },
-
   },
-  label: {
-    position: 'absolute',
-    left: '2%',
-    ...theme.fonts.label,
-    marginLeft: 0,
-    top: 9,
-    paddingLeft: theme.marginBase / 2,
-    transition: 'all ease-in-out 0.2s',
-    pointerEvents: 'none',
+  checkbox: {
+    display: 'none',
   },
-  hasValue: {
-    fontWeight: 700,
-    color: theme.colors.orange,
-    top: -theme.marginBase * 3,
-    left: 0,
-    transition: 'all ease-in-out 0.2s',
-    paddingLeft: '1%',
+  customCheckbox: {
+    ...theme.basicFlex,
+    width: theme.marginBase * 2.4,
+    height: theme.marginBase * 2.4,
+    border: `2px solid ${theme.colors.orange}70`,
+    borderRadius: theme.borderRadius.std / 2,
+    position: 'relative',
+  },
+  checked: {
+    display: 'block',
+    width: theme.marginBase,
+    height: theme.marginBase,
+    background: theme.colors.orange,
+    borderRadius: '50%',
   },
 
 }));
@@ -69,17 +38,20 @@ interface Props {
   title: string,
   name: string,
   value?: string
-  maxLength?: number
 }
 
-export const CheckBox = ({ title, name, value, maxLength = 200 }: Props) => {
+export const CheckBox = ({ title, name, value }: Props) => {
 
-    const [val, setVal] = useState(value || '');
     const formik = useFormikContext<any>();
     const classes = useStyles({ theme });
+    const [isChecked, setIsChecked] = useState(false);
 
     const handleValue = (e: any) => {
-      setVal(e.checked);
+      console.log('isChecked', isChecked);
+      setIsChecked(!isChecked);
+      if (!formik) {
+        return;
+      }
       formik.setFieldValue(
         name,
         e.value,
@@ -87,13 +59,13 @@ export const CheckBox = ({ title, name, value, maxLength = 200 }: Props) => {
     };
 
     return (
-      <div className={classes.inputContainer}>
-        <input type='checkbox' name={name} maxLength={maxLength}
-               value={val}
-               onChange={(e) => {
-                 handleValue(e.target);
-               }} />
-        {title}
+      <div className={classes.inputContainer} onClick={handleValue}>
+        <input className={classes.checkbox} type='checkbox' name={name}
+               checked={isChecked} />
+        <label className={classnames(classes.customCheckbox)}>
+          <div className={classnames({ [classes.checked]: isChecked })}></div>
+        </label>
+        <div className={classes.text}>{title}</div>
       </div>
     );
   }

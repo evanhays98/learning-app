@@ -35,17 +35,29 @@ const basicColors = {
   transparent: '#FFFFFF00',
   black: '#000000',
 };
-*/
+*//*
 const basicColors = {
-  yellowGradient: `linear-gradient(180deg, ${'#61c0e7'} 0%, ${'#00BFFF'} 100%)`,
-  darkGradient: `linear-gradient(200deg, ${'#203238'} 0%, ${'#141515'} 40%, ${'#000000'} 100%)`,
+  yellowGradient: `linear-gradient(180deg, ${'#61c0e7'} 0%, ${'#00BFFF'} 100%)`, // header background
+  darkGradient: `linear-gradient(200deg, ${'#203238'} 0%, ${'#141515'} 40%, ${'#000000'} 100%)`, // page background
+  lightGray: '#e4ecec', // text color primary
+  lightBeige: '#87CEEB', // text color secondary
+  transparentYellow: '#87CEEB20', // background button color secondary
+  orange: '#0077be', // strong color text
+  transparentDarkGray: 'rgba(34,40,45,0.33)', // background container color primary
+  brownGradiant: `linear-gradient(180deg, ${'#017fcb'} 0%, ${'#00598d'} 100%)`, // background button color primary
+  transparent: '#FFFFFF00', // transparent
+  black: '#000000', // black
+};*/
+
+const basicColors = {
+  yellowGradient: `linear-gradient(180deg, ${'#7b1a1a'} 0%, ${'#8b0000'} 100%)`,
+  darkGradient: `linear-gradient(200deg, ${'#4c0000'} 0%, ${'#2d0000'} 40%, ${'#000000'} 100%)`,
   lightGray: '#e4ecec',
-  darkGray: '#111111',
-  lightBeige: '#87CEEB',
-  transparentYellow: '#87CEEB20',
-  orange: '#0077be',
-  transparentDarkGray: 'rgba(34,40,45,0.33)',
-  brownGradiant: `linear-gradient(180deg, ${'#017fcb'} 0%, ${'#00598d'} 100%)`,
+  lightBeige: '#8b0000',
+  transparentYellow: '#8b000020',
+  orange: '#7b1a1a',
+  transparentDarkGray: 'rgba(76,0,0,0.33)',
+  brownGradiant: `linear-gradient(180deg, ${'#7b1a1a'} 0%, ${'#8b0000'} 100%)`,
   transparent: '#FFFFFF00',
   black: '#000000',
 };
