@@ -27,12 +27,12 @@ const useStyles = createUseStyles<string, { line: boolean, bgColor: Colors, colo
   square: {
     width: theme.marginBase * 5,
     height: theme.marginBase * 5,
-    minWidth: '0px !important',
+    minWidth: `${theme.marginBase * 5}px !important`,
   },
 }));
 
 
-interface Values {
+interface Props {
   className?: string;
   bgColor?: Colors;
   color?: Colors;
@@ -62,7 +62,7 @@ export const Button = ({
                          iconColor,
                          sizeIcon = theme.marginBase * 2,
                          ...rest
-                       }: Values & any) => {
+                       }: Props & any) => {
   const classes = useStyles({ line: line || false, theme, bgColor: bgColor, color: color });
 
   if (to) {

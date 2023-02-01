@@ -19,6 +19,7 @@ const useStyles = createUseStyles<string, {}, any>((theme: Theme) => ({
     justifyContent: 'space-evenly',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    zIndex: 100,
   },
   pageContainer: {
     width: '100%',

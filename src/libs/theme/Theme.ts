@@ -35,7 +35,7 @@ const basicColors = {
   transparent: '#FFFFFF00',
   black: '#000000',
 };
-*//*
+*/
 const basicColors = {
   yellowGradient: `linear-gradient(180deg, ${'#61c0e7'} 0%, ${'#00BFFF'} 100%)`, // header background
   darkGradient: `linear-gradient(200deg, ${'#203238'} 0%, ${'#141515'} 40%, ${'#000000'} 100%)`, // page background
@@ -47,9 +47,9 @@ const basicColors = {
   brownGradiant: `linear-gradient(180deg, ${'#017fcb'} 0%, ${'#00598d'} 100%)`, // background button color primary
   transparent: '#FFFFFF00', // transparent
   black: '#000000', // black
-};*/
+};
 
-const basicColors = {
+/*const basicColors = {
   yellowGradient: `linear-gradient(180deg, ${'#7b1a1a'} 0%, ${'#8b0000'} 100%)`,
   darkGradient: `linear-gradient(200deg, ${'#4c0000'} 0%, ${'#2d0000'} 40%, ${'#000000'} 100%)`,
   lightGray: '#e4ecec',
@@ -60,7 +60,7 @@ const basicColors = {
   brownGradiant: `linear-gradient(180deg, ${'#7b1a1a'} 0%, ${'#8b0000'} 100%)`,
   transparent: '#FFFFFF00',
   black: '#000000',
-};
+};*/
 
 export type Colors = keyof typeof basicColors;
 export const ColorsTest = {
@@ -93,10 +93,12 @@ export const theme = {
   },
   icon: {
     large: 24,
-    normal: 16,
+    normal: 20,
+    low: 16,
   },
   borderRadius: {
     std: 8,
+    large: 16,
   },
   fonts: {
     h1: {

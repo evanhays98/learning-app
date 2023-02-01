@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
-import { ColorsTest, theme, Theme } from '../theme/Theme';
+import { ColorsTest, theme, Theme } from '../theme';
 import React from 'react';
-import { Button } from './Buttons/Button';
+import { Button } from './Buttons';
 import { Icon } from './Icons';
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -18,6 +18,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     backgroundColor: `${theme.colors.black}40`, /* Dark background */
     boxShadow: `0 0 20px ${theme.colors.black}50`,
     backdropFilter: 'blur(10px)',
+    zIndex: 10,
   },
   title: {
     flex: 1,

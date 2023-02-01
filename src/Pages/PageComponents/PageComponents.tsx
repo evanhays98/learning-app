@@ -5,6 +5,9 @@ import { Colors, ColorsTest, theme, Theme } from '../../libs/theme';
 import { Button, Icon, Input, PageHeader, PageTitle, QuestionTranslationCard, TextArea } from 'src/libs/core';
 import mapValues from 'lodash/mapValues';
 import { CheckBox } from 'src/libs/core/Input/CheckBox';
+import { ChapterInformation } from '../../libs/core/ChapterInformation';
+import { SentenceInformation } from '../../libs/core/SentenceInformation';
+import { Modal } from '../../libs/core/Modal';
 
 const useStyles = createUseStyles((theme: Theme) => ({
   page: {
@@ -78,6 +81,7 @@ const BlockColor = ({ color }: Values) => {
 export const PageComponents = () => {
   const classes = useStyles({ theme });
   const testPolice = 'Je suis un test';
+  const [isOpened, setIsOpened] = React.useState(true);
 
 
   return (
@@ -101,7 +105,7 @@ export const PageComponents = () => {
         </div>
         <div className={classes.blockColorContainer}>
           <Button>hello</Button>
-          <Button icon={Icon.profile}>hello</Button>
+          <Button icon={Icon.profile} onClick={() => setIsOpened(true)}>hello</Button>
           <Button full>hello</Button>
           <Button full line bgColor='transparent' color={ColorsTest.orange}>Send again</Button>
         </div>
@@ -116,7 +120,14 @@ export const PageComponents = () => {
         <div className={classes.blockColorContainer}>
           <QuestionTranslationCard translation='abreuvoir' points={2}
                                    sentence='The pigs were eating out of a {/{trough}\}.' help='nom m' />
+          <ChapterInformation pin title='API REST'
+                              description='REST is a style of architecture for creating web APIs that use HTTP and JSON or XML. REST APIs allow clients to retrieve and modify data on a server with requests to specific endpoints. REST APIs are used to build modern web and mobile applications.' />
+          <ChapterInformation title='API REST'
+                              description='REST is a style of architecture for creating web APIs that use HTTP and JSON or XML. REST APIs allow clients to retrieve and modify data on a server with requests to specific endpoints. REST APIs are used to build modern web and mobile applications.' />
+
+          <SentenceInformation title='je ne sais pas quoi mettre fkeos fkoesp kfpoe skop' />
         </div>
+        <Modal isOpen={isOpened} setIsOpen={setIsOpened} title='Update Chapter' />
 
       </div>
     </>
