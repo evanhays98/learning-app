@@ -8,10 +8,17 @@ import { Button } from '../../libs/core/Buttons/Button';
 
 const useStyles = createUseStyles((theme: Theme) => ({
   page: {
-    backgroundColor: theme.colors.black,
-    height: '100vh',
+    minHeight: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    gap: theme.marginBase * 6,
+    flexDirection: 'column',
+    padding: theme.marginBase,
+    paddingBottom: theme.marginBase * 6,
   },
   container: {
+    ...theme.basicFlex,
+    gap: theme.marginBase * 3,
     margin: theme.marginBase * 2,
   },
 }));
@@ -26,23 +33,24 @@ export const Register = () => {
   const classes = useStyles({ theme });
 
   const submit = (values: Values) => {
-    console.log('OK');
     console.log(values);
   };
 
   return (
     <div className={classes.page}>
       <PageTitle text={'Sign up'} />
-      <div className={classes.container}>
-        <Formik initialValues={{ email: '', password: '', confirmPassword: '' }} onSubmit={submit}>
-          <Form>
+
+      <Formik initialValues={{ email: '', password: '', confirmPassword: '' }} onSubmit={submit}>
+        <Form>
+          <div className={classes.container}>
             <Input title='Email' name='email' />
             <Input title='Password' name='password' type='password' eye />
             <Input title='Confirm Password' name='confirmPassword' type='password' eye />
-            <Button text='Join' type='submit' />
-          </Form>
-        </Formik>
-      </div>
+            <Button text='Join' type='submit' full />
+          </div>
+        </Form>
+      </Formik>
+
     </div>
   );
 };

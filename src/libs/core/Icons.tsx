@@ -1,6 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { AiFillPushpin, AiOutlineHome } from 'react-icons/ai';
+import { AiFillPushpin, AiOutlineFolderAdd, AiOutlineHome } from 'react-icons/ai';
 import { MdOutlineEdit, MdWorkOutline } from 'react-icons/md';
 import { RiUser3Line } from 'react-icons/ri';
 import { IoMdClose } from 'react-icons/io';
@@ -30,7 +30,8 @@ export enum Icon {
   close,
   check,
   pin,
-  edit
+  edit,
+  addFolder
 }
 
 interface Props {
@@ -50,6 +51,7 @@ export const Icons = ({ icon, size, color }: Props) => {
       {icon === Icon.check && <BsCheck className={classes.icon} />}
       {icon === Icon.pin && <AiFillPushpin className={classes.icon} />}
       {icon === Icon.edit && <MdOutlineEdit className={classes.icon} />}
+      {icon === Icon.addFolder && <AiOutlineFolderAdd className={classes.icon} />}
     </>
   );
 };

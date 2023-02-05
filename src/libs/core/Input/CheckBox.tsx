@@ -47,7 +47,6 @@ export const CheckBox = ({ title, name, value }: Props) => {
     const [isChecked, setIsChecked] = useState(false);
 
     const handleValue = (e: any) => {
-      console.log('isChecked', isChecked);
       setIsChecked(!isChecked);
       if (!formik) {
         return;

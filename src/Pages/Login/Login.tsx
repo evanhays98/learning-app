@@ -1,42 +1,46 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { theme, Theme } from '../../libs/theme/Theme';
-import { PageTitle } from '../../libs/core/PageTitle';
+import { theme, Theme } from '../../libs/theme';
+import { Button, PageTitle } from '../../libs/core';
 import Input from '../../libs/core/Input/Input';
 import { Form, Formik } from 'formik';
-import { Button } from '../../libs/core/Buttons/Button';
 import { useLogin } from '../../libs/api/src';
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyles = createUseStyles((theme: Theme) => ({
   page: {
-    height: '100vh',
-    maxWidth: theme.marginBase * 80,
-    margin: '0 auto',
+    minHeight: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    gap: theme.marginBase * 6,
+    flexDirection: 'column',
+    padding: theme.marginBase,
+    paddingBottom: theme.marginBase * 6,
   },
   container: {
+    ...theme.basicFlex,
+    gap: theme.marginBase * 3,
     margin: theme.marginBase * 2,
   },
-  wrapper: {},
 }));
 
 interface Values {
-  email: string,
+  mail: string,
   password: string,
 }
 
 export const Login = () => {
   const classes = useStyles({ theme });
   const { mutateAsync: login } = useLogin();
+  const navigate = useNavigate();
 
 
-  const submit = (values: Values) => {
-    console.log('OK');
-    console.log(values);
+  const submit = async (values: Values) => {
     try {
-      login(values);
+      await login(values);
+      navigate('/home');
     } catch (e) {
-      console.log(e);
       throw e;
     }
   };
@@ -44,17 +48,15 @@ export const Login = () => {
   return (
     <div className={classes.page}>
       <PageTitle text={'Sign in'} />
-      <div className={classes.container}>
-        <div className={classes.wrapper}>
-          <Formik initialValues={{ email: '', password: '' }} onSubmit={submit}>
-            <Form>
-              <Input title='Email' name='email' />
-              <Input title='Password' name='password' type='password' eye />
-              <Button text='Connect' type='submit' />
-            </Form>
-          </Formik>
-        </div>
-      </div>
+      <Formik initialValues={{ mail: '', password: '' }} onSubmit={submit}>
+        <Form>
+          <div className={classes.container}>
+            <Input title='Email' name='mail' />
+            <Input title='Password' name='password' type='password' eye />
+            <Button text='Connect' type='submit' full />
+          </div>
+        </Form>
+      </Formik>
     </div>
   );
 };

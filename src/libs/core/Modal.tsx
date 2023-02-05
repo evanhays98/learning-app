@@ -27,14 +27,13 @@ const useStyles = createUseStyles<string, { height: number }, any>((theme: Theme
     backdropFilter: 'blur(10px)',
     borderRadius: [theme.borderRadius.large, theme.borderRadius.large, 0, 0],
     boxShadow: theme.boxShadow.std,
-    ...theme.basicFlex,
     width: '100%',
-    alignItems: 'flex-start',
     padding: theme.marginBase * 2,
     position: 'fixed',
     bottom: 0,
     left: 0,
     minHeight: 400,
+    height: 'fit-content',
     transition: 'all 0.3s ease-in-out',
   },
   animationContainer: {
@@ -47,6 +46,7 @@ const useStyles = createUseStyles<string, { height: number }, any>((theme: Theme
     flexWrap: 'nowrap',
     justifyContent: 'space-between',
     flexDirection: 'row-reverse',
+    marginBottom: theme.marginBase * 2,
   },
   title: {
     ...theme.fonts.h4,

@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { Colors, theme, Theme } from '../../theme/Theme';
-import { Link } from 'react-router-dom';
+import { Colors, theme, Theme } from '../../theme';
+import { Link, LinkProps } from 'react-router-dom';
 import { Icon, Icons } from '../Icons';
 
 const useStyles = createUseStyles<string, { line: boolean, bgColor: Colors, color: Colors }, any>((theme: Theme) => ({
@@ -40,54 +40,42 @@ interface Props {
   text?: string;
   children?: React.ReactNode;
   full?: boolean;
-  to?: string;
   icon?: Icon;
   line?: boolean;
   square?: boolean;
   sizeIcon?: number;
 }
 
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = ({
-                         className,
-                         square,
-                         bgColor = 'brownGradiant',
-                         color = 'lightGray',
-                         children,
-                         text,
-                         full,
-                         to,
-                         icon,
-                         line,
-                         iconColor,
-                         sizeIcon = theme.marginBase * 2,
-                         ...rest
-                       }: Props & any) => {
-  const classes = useStyles({ line: line || false, theme, bgColor: bgColor, color: color });
+interface AProps extends React.LinkHTMLAttributes<HTMLLinkElement> {
+  href: string;
+}
 
-  if (to) {
-    return (
-      <Link to={to} className={classnames(classes.blockColor, {
-        [classes.full]: full,
-        [classes.line]: line,
-        [classes.square]: square,
-      }, className)} {...rest}>
-        {children}
-        {text && text}
-        {icon && <Icons icon={icon} size={16} />}
-      </Link>
-    );
-  } else {
-    return (
-      <button className={classnames(classes.blockColor, {
-        [classes.full]: full,
-        [classes.line]: line,
-        [classes.square]: square,
-      }, className)} {...rest}>
-        {children}
-        {text && text}
-        {icon && <Icons icon={icon} size={sizeIcon} color={iconColor} />}
-      </button>
-    );
+export type GenericButtonProps = ButtonProps | LinkProps | AProps;
+
+
+export const Button = (props: Props & GenericButtonProps) => {
+  const classes = useStyles({
+    line: props.line || false,
+    theme,
+    bgColor: props.bgColor || 'brownGradiant',
+    color: props.color || 'lightGray',
+  });
+  let ButtonComp: any = 'button';
+  if ('to' in props) {
+    ButtonComp = (lprops: any) => <Link to={props.to} {...lprops} />;
   }
+  if ('href' in props) {
+    ButtonComp = 'a';
+  }
+  return <ButtonComp className={classnames(classes.blockColor, {
+    [classes.full]: props.full,
+    [classes.line]: props.line,
+    [classes.square]: props.square,
+  }, props.className)} {...props} >
+    {props.children}
+    {props.text && props.text}
+    {props.icon && <Icons icon={props.icon} size={16} />}
+  </ButtonComp>;
 };
